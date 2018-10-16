@@ -10,7 +10,7 @@ Request URL template:
 
 JSON Response values:
 
-    status: status of request  - OK|Invalid address|Invalid request|Service failure
+    status: status of request  - OK|Address missing|Invalid request|Service failure
     description: contains description of status
     geoservice: geoservice used to get geocoordinate if "OK" status else None
     payload: geocoordinate json (latitude and longitude) if "OK" status else None

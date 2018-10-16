@@ -78,7 +78,7 @@ class GeoServiceHandler(BaseHTTPRequestHandler):
     @staticmethod
     def _create_invalid_address_json():
         result = GeoResponse(
-            status='Invalid address',
+            status='Address missing',
             description= 'Address parameter missing in the request sent.',
             payload=None,
             geoservice=None)
