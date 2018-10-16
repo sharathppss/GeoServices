@@ -35,7 +35,7 @@ Sample Response:
 Requirements:
 
 + Python 3.7
-+ ApiKeys.txt (not present on repository)
++ ApiKeys.txt (not present in repository)
 
 Usage:
 
