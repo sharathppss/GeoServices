@@ -6,7 +6,7 @@ response is recieved. Currently google and bing services supported (in that orde
 
 Request URL template:
 
-    <ip address>:<port>/geolocation?address:<address string> template
+    <ip address>:<port>/geolocation?address:<address string>
 
 JSON Response values:
 
