@@ -1,10 +1,9 @@
 from GeoDataClasses import GeoCoordinate
 from urllib.parse import urlencode
 import Utils
-from GeoServices.BaseGeoService import BaseGeoService
 
 
-class GoogleGeoService(BaseGeoService):
+class GoogleGeoService:
 
     _google_url = "https://maps.googleapis.com/maps/api/geocode/json"
 
@@ -13,6 +12,11 @@ class GoogleGeoService(BaseGeoService):
         self.key = api_key
 
     def _create_url(self, address):
+        """
+
+        :param address:
+        :return: url string with params
+        """
 
         url_params = dict()
         url_params["address"] = address
@@ -21,6 +25,11 @@ class GoogleGeoService(BaseGeoService):
         return url
 
     def get_geocordinate(self, address):
+        """
+
+        :param address: string address to be translated to coordinate
+        :return: GeoCoordinate object if successful else None
+        """
 
         url = self._create_url(address)
         response = Utils.make_webcall(url)
@@ -32,11 +41,16 @@ class GoogleGeoService(BaseGeoService):
 
     @staticmethod
     def _translate_response(response):
+        """ Extract geocoordinate information from json returned from webcall.
+
+        :param response: json string from webcall.
+        :return: GeoCoordinate object if success else None
+        """
 
         try:
             if response['status'] == 'OK':
-                lat_long_dict = response['results'][0]['geometry']['location']
-                result = GeoCoordinate(lat_long_dict['lat'], lat_long_dict['lng'] )
+                location = response['results'][0]['geometry']['location']
+                result = GeoCoordinate(location['lat'], location['lng'] )
                 return result
 
             else:

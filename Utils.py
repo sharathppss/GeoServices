@@ -1,11 +1,16 @@
 import urllib.request
 import json
 import ssl
+
 APIKEYS_FILE = "ApiKeys"
 
 
 def make_webcall(url):
+    """ make webcall using url provided.
 
+    :param url
+    :return: json string if successful else None
+    """
     try:
         request = urllib.request.Request(url)
         print(url)
@@ -21,7 +26,10 @@ def make_webcall(url):
 
 
 def get_api_keys():
+    """ Load api_keys for all geoservices from a file at APIKEYS_FILE.
 
+    :return: dict of keys if successful else Nonen
+    """
     result = {}
     try:
         with open(APIKEYS_FILE, 'r', encoding='utf-8') as file:
@@ -32,7 +40,6 @@ def get_api_keys():
 
     except Exception as error:
         print("get_api_keys: Exception getting api keys: {0}".format(error))
-        return None
 
     return result
 

@@ -35,6 +35,11 @@ class GeoServiceHandler(BaseHTTPRequestHandler):
 
     @staticmethod
     def _get_geo_location(address):
+        """ Runs thorough geoservices in order and tries to retrieve geocoordinated from them.
+
+        :param address: address string to retrieve geo coordinate for.
+        :return: json string with appropriate json content.
+        """
 
         # the services will be processed in the order of the list
         services = [{'name': 'google', 'class': GoogleGeoService},
@@ -42,6 +47,10 @@ class GeoServiceHandler(BaseHTTPRequestHandler):
         keys = Utils.get_api_keys()
 
         for service in services:
+            if service['name'] not in keys:
+                print("_get_geo_location: API key not loaded for service {0} ".format(service['name']))
+                continue
+
             key = keys.get(service['name'])
             print("_get_geo_location: Service {0} geotranslation check started..".format(service['name']))
             if key:
@@ -79,7 +88,7 @@ class GeoServiceHandler(BaseHTTPRequestHandler):
     def _create_invalid_path_json():
         result = GeoResponse(
             status= 'Invalid request',
-            description='Please use <url>:<port>/geocordinate?address:<address string> template for the request',
+            description='Please use <url>:<port>/geolocation?address:<address string> template for the request',
             payload =None,
             geoservice =None)
         return json.dumps(result.__dict__).encode('utf-8')

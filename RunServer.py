@@ -4,7 +4,12 @@ from GeoServiceHandler import GeoServiceHandler
 
 
 def start_server(ip, port):
+    """
 
+    :param ip: ipaddress for the server to start at
+    :param port: port where to start
+    exception raised on failure to start server
+    """
     httpd = HTTPServer((ip, port), GeoServiceHandler)
     print('GeoServer running at {}:{}'.format(ip, port))
     httpd.serve_forever()
